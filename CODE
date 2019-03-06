@@ -1,0 +1,432 @@
+
+#include<fstream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<stdio.h>
+#include<iomanip.h>
+#include<dos.h>
+//using namespace std;
+
+fstream file;
+class train
+{
+int i,tbno;
+char tname[30];
+int qno,cno,doj,pno,age[6],tcode,no;
+char name[6][30],gen[6][2];
+public:
+void destination();
+void fare_d();
+void getdata();
+char* getname();
+int  gettbno();
+float fare(int no,int qno,int cno);
+float tot;
+void gettrainname(int tcode);
+void putdata();
+void putdataa();
+void writedata(train t);
+void readdata(train t);
+void search(train t,int tbno);
+void cancel(train t,int tbno);
+
+};
+
+
+void train::destination()
+{
+
+	cout<<"Select the region where you want to travel";
+	cout<<"\n 1. Northern India  2. Southern India  3. Western India   4. Eastern India";
+	cin>>no;
+	switch(no)
+{ case 1:       cout<<"\nThese are the following trains from Delhi to NI where the arrival time and time taken by train is written in brackets";
+		cout<<"\n1. Punjabi Express(12:30 pm, 6hours)       -Train code=1001";
+		cout<<"\n2. Kanpur Shatabdi (4:00 pm, 8hours)-Train code=1002";
+		cout<<"\n3. Jammu Superfast(5:25 pm, 12 hours) _Train code=1003 ";
+		cout<<"\n Enter Train code";
+		cin>>tcode;
+		clrscr();
+		break;
+case 2:         cout<<"\nThese are the following trains from Delhi to SI where the arrival time and time taken by train is written in brackets";
+		cout<<"\n1. Kerala Express(4:30 pm, 26 hours)    -Train code=2001";
+		cout<<"\n2.Bangalore Superfast(5:00 pm, 24 hours)-Train code=2002";
+		cout<<"\n 3.Hyderbadi Express(7:00 am, 20 hours) -Train code=2003";
+		cout<<"\n Enter Train code";
+		cin>>tcode;
+		clrscr();
+		break;
+case 3:         cout<<"\nThese are the following trains from Delhi to WI where the arrival time and time taken by train is written in brackets";
+		cout<<"\n 1.Rajasthani Express(3:30 pm,7 hours)-Train code=3001";
+		cout<<"\n 2.Mumbai Superfast(6:30 pm, 15 hours)-Train code=3002";
+		cout<<"\n 3.Gujrati Express(8:00 am,12 hours)  -Train code=3003";
+		cout<<"\n Enter Train code";
+		cin>>tcode;
+		clrscr();
+		break;
+case 4:         cout<<"These are the following trains from Delhi to EI where the arrival time and time taken by train is written in brackets";
+		cout<<"\n 1.Bengali Express(5:30 am, 14 hours)  -Train code=4001";
+		cout<<"\n 2.Odisha Express(6:30 am,16 hours)    -Train code=4002";
+		cout<<"\n 3.Jharkhand Express(8:00 pm, 18 hours)-Train code=4003";
+		cout<<"\n Enter Train code";
+		cin>>tcode;
+		clrscr();
+		break;
+default:        cout<<"Wrong option Choosen";
+}}
+
+
+
+	void train::gettrainname(int tcode)
+{if(tcode==1001)
+{strcpy(tname,"Punjabi express");
+
+}
+else if(tcode==1002)
+{strcpy(tname,"Kanpur shatabdi ");
+
+}
+else if(tcode==1003)
+{strcpy(tname,"Jammu superfast");
+}
+else if(tcode==2001)
+{strcpy(tname,"Kerala express");
+}
+else if(tcode==2002)
+{strcpy(tname,"Banglore superfast");
+}
+else if(tcode==2003)
+{strcpy(tname,"Hyderabadi express");
+}
+else if(tcode==3001)
+{strcpy(tname,"Rajasthani express");
+}
+else if(tcode==3002)
+{strcpy(tname,"Mumbai superfast");
+}
+else if(tcode==3003)
+{strcpy(tname,"Gujrati express");
+}
+else if(tcode==4001)
+{strcpy(tname,"Bengali express");
+}
+else if(tcode==4002)
+{strcpy(tname,"Odhisha express");
+}
+else if(tcode==4003)
+{strcpy(tname,"Jharkhand express");
+}	}
+char* train::getname()
+{return tname;
+}
+
+	void train::getdata()
+	{       char qname;
+		cout<<"\n Enter the details";
+		destination();
+
+		cout<<"\n Enter the no of passengers";
+		cin>>pno;
+		cout<<"\n Enter the Date  of journey (only date)";
+		cin>>doj;
+		cout<<"\n Enter the Quota(no.)-1.General  2. Tatkal";
+		cin>>qno;
+		cout<<"\n  Enter the class(no.)-    1.Sleeper   2. 3-AC  3. 2-AC  4. 1-AC  ";
+		cin>>cno;
+		cout<<"Enter the tkt booking no";
+		cin>>tbno;
+		clrscr();
+		for(i=0;i<pno;i++)
+		{cout<<"Enter the details of individual passsenger)";
+		cout<<"Enter the name";
+		gets(name[i]);
+		cout<<"Enter age";
+		cin>>age[i];
+		cout<<"Enter Gender(M/F)";
+		gets(gen[i]);
+		clrscr();
+		gettrainname(tcode);
+		}
+
+	}
+
+
+	int train::gettbno()
+	{
+		return tbno;
+	}
+
+
+	float train::fare(int pno,int qno,int cno)
+	{int base,st;
+		float tot;
+		void fare_d();
+		switch(qno)
+		{case 1: switch(cno)
+				{case 1: base=pno*250;
+						st=12/100*base;
+						tot=base+st;
+						return tot;
+					      //	break;
+				case 2:  base=pno*500;
+						st=12/100*base;
+						tot=base+st;
+						return tot;
+					      //	break;
+				case 3:  base=pno*750;
+						st=12/100*base;
+						tot=base+st;
+						return tot;
+					       //	break;
+				case 4:  base=pno*1000;
+						st=12/100*base;
+						tot=base+st;
+						return tot;
+					       //	break;
+				}
+			break;
+
+		case 2: switch(cno)
+				{case 1: base=pno*450;
+						st=12/100*base;
+						tot=base+st;
+						return tot;
+					       //	break;
+				case 2:  base=pno*700;
+						st=12/100*base;
+						tot=base+st;
+						return tot;
+					       //	break;
+				case 3:  base=pno*950;
+						st=12/100*base;
+						tot=base+st;
+						return tot;
+					       //	break;
+				case 4:  base=pno*1200;
+						st=12/100*base;
+						tot=base+st;
+						return  tot;
+					       //	break;
+				}
+			break;
+		}}
+
+	void train::fare_d()
+	{ cout<<"The fare details are as follows";
+	cout<<"\nQuota-GENERAL";
+	cout<<"\n\tSLEEPER--Rs.250  \n\t3-AC--Rs.500  \n\t2-AC--Rs.750  \n\t1-AC--Rs.1000      ";
+	cout<<"\nQuota-TATKAL";
+	cout<<"\n\tSLEEPER--Rs.450 \n\t3-AC--Rs.700 \n\t2-AC--Rs.950 \n\t1-AC--Rs.1200      ";
+	cout<<"\nNOTE:12% service tax will also be included";
+	}
+
+	void train::putdata()
+	{int l;
+	cout.setf(ios::left);
+	cout.width(12);
+	cout<<gettbno();
+	cout.width(10);
+	cout<<tcode;
+	cout.width(20);
+	cout<<getname();
+	cout.width(12);
+	if(qno==1)
+	cout<<"GENERAL";
+	else
+	cout<<"TATKAL";
+
+	 cout.width(10);
+	 if(cno==1)
+	 {cout<<"SLEEPER"; }
+	 else if(cno==2)
+		{ cout<<"3-AC";}
+	 else if(cno==3)
+		 {cout<<"2-AC";}
+	 else if(cno==3)
+		{cout<<"1-AC";}
+	  cout.width(10);
+	  tot=fare(pno,qno,cno);
+	 cout<<tot;
+	 cout<<"\n";
+	 }
+
+	void train::putdataa()
+	{int l;
+   /*	cout.setf(ios::left);
+	cout.width(12);
+	cout<<gettbno();
+	cout.width(10);
+	cout<<tcode;
+	cout.width(20);
+	cout<<getname();
+	cout.width(12);
+	if(qno==1)
+	cout<<"GENERAL";
+	else
+	cout<<"TATKAL";
+
+	 cout.width(10);
+	 if(cno==1)
+	 {cout<<"SLEEPER"; }
+	 else if(cno==2)
+		{ cout<<"3-AC";}
+	 else if(cno==3)
+		 {cout<<"2-AC";}
+	 else if(cno==3)
+		{cout<<"1-AC";}
+	  cout.width(10);
+	  tot=fare(pno,qno,cno);
+	 cout<<tot;
+	 cout<<"\n";         */
+	 cout<<"\n";cout<<"\n";cout<<"\n";
+	 cout<<"\n Date of journey "<<doj;
+	 cout<<"\n No of passengers are "<<pno;
+	 for(l=0;l<pno;l++)
+	 {cout<<"\n The details of individual passsenger(name,age,gender{M/F}) are ";
+		puts(name[l]);cout<<",";
+		cout<<age[l];cout<<",";
+		puts(gen[l]);
+	 }   getch();
+
+	  }
+
+	void train::writedata(train t)
+	{file.open("tkt11.dat",ios::in|ios::app|ios::binary);
+
+	t.getdata();
+	file.write((char*)&t,sizeof(t));
+	file.close();
+	}
+
+	void train::readdata(train t)
+	{file.open("tkt11.dat",ios::in|ios::app|ios::binary);
+	while(file.read((char*)&t,sizeof(t)))
+	{t.putdata();
+	}
+	file.close();
+	}
+
+	void train::cancel(train t,int tbno)
+	{int found=0;
+	char jok;
+	 fstream temp("temp.dat",ios::app|ios::binary);
+	 file.open("tkt11.dat",ios::in|ios::app|ios::binary);
+	 while(file.read((char*)&t,sizeof(t)))
+	{if(t.gettbno()==tbno)
+	{cout<<"Record to be deleted";
+	cout<<"\nBooking no   Train no     Train name      Quota       Class       ffare";
+	cout<<"\n";
+	t.putdata();
+	cout<<"\n Note: Only 70% of the total fare will be refunded.";
+	cout<<"\n  If want to cancel tkt press y,otherwise n;";
+	cin>>jok;
+	if(jok=='y')
+	found=1;
+	else {temp.write((char*)&t,sizeof(t));
+	}
+	getch();
+	}
+	else
+	{temp.write((char*)&t,sizeof(t));
+	}}
+	if(found==0)
+	{cout<<"Record not found";
+	}
+	file.close();
+	temp.close();
+	if(jok=='y');
+	{remove("tkt11.dat");
+	rename("temp.dat","tkt11.dat");
+	}}
+
+	void train::search(train t,int tbno)
+	{int found=0;
+	file.open("tkt11.dat",ios::in|ios::app|ios::binary);
+	while(file.read((char*)&t,sizeof(t)))
+	{if(t.gettbno()==tbno)
+	{found=1;
+	cout<<"\nBooking no   Train no     Train name      Quota       Class       fare";
+	cout<<"\n";
+	t.putdata();
+	t.putdataa();
+	break;
+	}}
+	if(found==0)
+	cout<<" Record not found";
+	file.close();
+	}
+
+
+
+	void main()
+	{
+		clrscr();
+		train t;
+
+		int option,lmn,ttt,tt,i,j;
+		char ans='n';
+		for(i=1;i<12;i++)
+{ gotoxy(30,9);
+cout<<"___________________";
+gotoxy(30,11);
+cout<<"-------------------";
+gotoxy(30,12);
+cout<<"PLEASE WAIT LOADING...";
+
+
+for(j=0;j<14;j++)
+	{gotoxy(30+i,10);
+	cout<<"*******";
+	delay(35);
+	}
+	}
+	clrscr();
+
+
+		cout<<"WELCOME TO NSIT RAILWAYS";
+		do{
+		cout<<"\n Select from the following operations";
+		cout<<"\n1.Fare detail  \n2.Ticket booking  \n3.Display Ticket  \n4.Search Ticket   \n5.Cancel TICKET   \n6.Exit";
+		cout<<"\n";
+		cin>>option;
+
+		clrscr();
+		switch(option)
+		{case 1: t.fare_d();
+			getch();
+			break;
+		case 2: t.writedata(t);
+			cout<<"\nBOOKING SUCCESSFUL";
+				break;
+
+		case 3: cout<<"\n----------------------***** NSIT RAILWAYS  *****-----------------------------";
+			cout<<"\nBooking no   Train no     Train name      Quota       Class       ffare";
+			cout<<"\n";
+			t.readdata(t);
+			getch();
+
+				break;
+
+		case 4:         cout<<"\nEnter the ticket no ";
+				cin>>ttt;
+				t.search(t,ttt);
+				break;
+		case 5:cout<<"Enter the tkt booking no to be canceled ";
+			cin>>lmn;
+			t.cancel(t,lmn);
+			getch();
+			break;
+		case 6: exit(0);
+			break;
+
+		}
+		clrscr();
+		cout<<"\nDo you want to continue(y/n)";
+		cin>>ans;
+		}while(ans=='y');
+		clrscr();
+		cout<<"Thanks for using NSIT RAILWAYS";
+		getch();
+		}
+
